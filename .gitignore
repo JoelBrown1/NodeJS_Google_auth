@@ -351,3 +351,4 @@ MigrationBackup/
 /.blackbox/pubring.gpg~
 /.blackbox/pubring.kbx~
 /.blackbox/secring.gpg
+/config/config.env
