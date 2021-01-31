@@ -10,7 +10,7 @@ https://github.com/StackExchange/blackbox
   # to use files during development:
   blackbox_edit_start - blackbox_edit_start {{./config/config.env.gpg}}
   # when done:
-  blackbox_edit_end
+  blackbox_edit_end {{./config/config.env.gpg}}
 
 # source for tutorial:
 https://www.youtube.com/watch?v=SBvmnHTQIPY 

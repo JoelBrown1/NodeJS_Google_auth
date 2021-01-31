@@ -10,10 +10,17 @@ const morgan = require('morgan');
 var exphbs  = require('express-handlebars');
 // connect to the database
 const connectDB = require('./config/db');
+// need to use passport to allow users to log in with google (or other 3rd party services)
+const passport = require('passport');
+const session = require('express-session');
 
 
 // load config
 dotenv.config({path: './config/config.env'});
+
+// loading in the passport config for the test app
+//  adding the second is an argument that we can use in the config code
+require('./config/passport')(passport)
 
 // connect to the db
 connectDB();
@@ -34,11 +41,25 @@ app.engine(
 );
 app.set('view engine', '.hbs');
 
+// adding express session middleware
+// must go before passport sessions
+app.use(session({
+  secret: 'keyboard cat', // this can be anything really
+  resave: false,
+  saveUninitialized: false,
+}))
+
+// adding the passport middleware to the app
+app.use(passport.initialize());
+// passport sessions needs exoress sessions
+app.use(passport.session());
+
 // Static folders for images/custom CSS etc...
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/', require('./routes/index'));
+app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 3000;
 
