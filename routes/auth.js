@@ -20,10 +20,20 @@ router.get('/google', passport.authenticate('google', { scope: ['profile']}))
 router.get('/google/callback', passport.authenticate( 'google', { 
   failureRedirect: '/'
 }), (req, res) => {
-  console.log('do we get past the failureRedirect catch');
   // if authentication is successfull, redirect to the dashboard
   // failure redirect is handled above
   res.redirect('/dashboard');
+})
+
+/**
+ * @description:  logout the user
+ * @route: GET /auth/logout
+ */
+router.get('/logout', (req, res) => {
+  // with passport middleware, we have the logout method on the req obj
+  req.logOut();
+  // send the user to the index page
+  res.redirect('/');
 })
 
 module.exports = router;
