@@ -1,5 +1,7 @@
 // make an express server
 const express = require("express");
+// bring in mongoose
+const mongoose = require('mongoose');
 // path is a core NODEJS module 
 const path = require('path');
 // bring in the environmental varialbes
@@ -13,6 +15,9 @@ const connectDB = require('./config/db');
 // need to use passport to allow users to log in with google (or other 3rd party services)
 const passport = require('passport');
 const session = require('express-session');
+// add a Mongo store to preserve server state
+// takes session as a second property
+const MongoStore = require('connect-mongo')(session)
 
 
 // load config
@@ -47,6 +52,7 @@ app.use(session({
   secret: 'keyboard cat', // this can be anything really
   resave: false,
   saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection}) // is the mongo store property
 }))
 
 // adding the passport middleware to the app
