@@ -25,9 +25,7 @@ module.exports = function(passport) {
     // check to see if the person is already in the database
     try {
       let person = await Person.findOne({ googleId: profile.id})
-      console.log('do we have a person: ', person);
       if ( person === null ) {
-        console.log('we should be adding a person to the db');
         // if person doesn't exist in the database, create a new record for the person
         person = await Person.create(newPerson);
       }
