@@ -15,6 +15,7 @@
 <body>
   {{!-- putting in the partial for the navigation --}}
   {{> _header }}
+  {{> _add_btn }}
   <div class="container">
     {{!-- this is where the body content will be displayed --}}
     {{{body}}}
@@ -22,9 +23,14 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.16.0/ckeditor.js"></script>
   <script>
     M.Sidenav.init(document.querySelector('.sidenav'));
+    M.FormSelect.init(document.querySelector('#status'));
+    
+    CKEDITOR.replace('body', {
+      plugins: 'wysiwygarea, toolbar, basicstyles, link'
+    });
   </script>
 </body>
 </html>
