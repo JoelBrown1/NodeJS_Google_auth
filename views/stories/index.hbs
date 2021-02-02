@@ -5,7 +5,16 @@
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          {{!-- TODO: editIcon goes here --}}
+          {{!--
+            @description: editIcon takes 3 parameters
+            story user id - supplied for each story in the loop
+            logged in user - requires information outside of the loop, accessed with '../{{value}}'
+            storyId - supplied for each story in the loop 
+            float - defaut value set to true so not strictly required
+
+            to parse html in template {{{}}} is required
+          --}}
+          {{{editIcon user ../user _id}}}
         </div>
         <div class="card-content center-align">
           <h5>{{title}}</h5>

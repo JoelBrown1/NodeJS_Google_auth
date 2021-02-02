@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'develop') {
 /**
  * Handlebars helper functions need to be registered to the handlebars template engine
  */
-const {formatDate, truncate, stripTags} = require('./helpers/hbs')
+const {formatDate, truncate, stripTags, editIcon} = require('./helpers/hbs')
 
 // Handlebars
 app.engine(
@@ -54,7 +54,8 @@ app.engine(
     helpers: {
       formatDate, 
       truncate, 
-      stripTags
+      stripTags,
+      editIcon
     },
     defaultLayout: 'main', 
     extname: '.hbs'
@@ -75,6 +76,14 @@ app.use(session({
 app.use(passport.initialize());
 // passport sessions needs exoress sessions
 app.use(passport.session());
+
+// express global variables
+app.use(function(req, res, next) {
+  // setting global variable for user which is accessible from req and 
+  // sending it through to res
+  res.locals.user = req.user || null
+  next()
+})
 
 // Static folders for images/custom CSS etc...
 app.use(express.static(path.join(__dirname, 'public')))
