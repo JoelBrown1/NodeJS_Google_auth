@@ -32,6 +32,11 @@ connectDB();
 
 const app = express();
 
+// body parsing middleware
+app.use(express.urlencoded({ extended: false }));
+// allow ap to use json data
+app.use(express.json());
+
 // middleware for the server:
 if (process.env.NODE_ENV === 'develop') {
   app.use(morgan('dev'));
