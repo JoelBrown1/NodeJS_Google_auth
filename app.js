@@ -41,10 +41,17 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'develop') {
   app.use(morgan('dev'));
 }
+
+/**
+ * Handlebars helper functions need to be registered to the handlebars template engine
+ */
+const {formatDate} = require('./helpers/hbs')
+
 // Handlebars
 app.engine(
   '.hbs', 
   exphbs({
+    helpers: {formatDate},
     defaultLayout: 'main', 
     extname: '.hbs'
   })
