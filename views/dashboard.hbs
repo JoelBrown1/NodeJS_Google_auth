@@ -20,7 +20,13 @@
       --}}
       <tr>
         <td><a href="/stories/{{_id}}">{{title}}</a></td>
-        <td>{{createdAt}}</td>
+        {{!-- 
+          - created date can be formated with the hbs helper function registered in app.js
+          - needs the helper function, date and format 
+          - @format: function param1 'param2' ('MMM Do YYY, h:mm:ss a' - for instance)
+          - @documentation: 
+        --}}
+        <td>{{formatDate createdAt 'MMM-D-YYYY, h:mm:ss a'}}</td>
         <td><span class="dash-status">{{status}}</span></td>
         <td></td>
       </tr>
